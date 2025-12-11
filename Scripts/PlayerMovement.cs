@@ -43,15 +43,19 @@ public class PlayerMovement : MonoBehaviour
     private void HandleRotation()
     {
         Vector3 move = (
-            MoveDirection.forward * inputManager.MovementInputY +
-            MoveDirection.right * inputManager.MovementInputX
+            -MoveDirection.right * inputManager.MovementInputY +
+            MoveDirection.forward * inputManager.MovementInputX
         );
 
         if (move.sqrMagnitude < 0.01f) return;
+        
+        move.y = 0f;
+        move.Normalize();
 
-        Quaternion targetRot = Quaternion.LookRotation(move.normalized);
+        Quaternion targetRot = Quaternion.LookRotation(move);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
     }
+
     
     private void HandleMovement()
     {
