@@ -139,7 +139,7 @@
             "id": "be201226-fdf2-449a-9f25-6f7fbadea722",
             "actions": [
                 {
-                    "name": "ItemPickUp",
+                    "name": "WorldInteract",
                     "type": "Button",
                     "id": "bc178665-2124-40ef-995b-a6d3f7a3ece5",
                     "expectedControlType": "",
@@ -165,7 +165,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ItemPickUp",
+                    "action": "WorldInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

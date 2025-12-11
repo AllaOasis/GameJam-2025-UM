@@ -20,8 +20,8 @@ public class InputManager : ScriptableObject
             playerControls.Movement.Jump.performed += i => jump = i.ReadValue<float>();
             playerControls.Movement.Jump.canceled += i => jump = i.ReadValue<float>();
             
-            playerControls.Actions.ItemPickUp.performed += i => pickUp = i.ReadValue<float>();
-            playerControls.Actions.ItemPickUp.canceled += i => pickUp = i.ReadValue<float>();
+            playerControls.Actions.WorldInteract.performed += i => interact = i.ReadValue<float>();
+            playerControls.Actions.WorldInteract.canceled += i => interact = i.ReadValue<float>();
         }
         
         playerControls.Enable();
@@ -39,7 +39,7 @@ public class InputManager : ScriptableObject
     private Vector2 camera;
     private float sprint;
     private float jump;
-    private float pickUp;
+    private float interact;
     
     #endregion
     #region Public Properties
@@ -56,8 +56,10 @@ public class InputManager : ScriptableObject
     
     public bool JumpInput => jump > 0;
     
-    public bool PickUpInput => pickUp > 0;
+    public bool InteractInput => interact > 0;
 
+    public bool InteractClicked => playerControls.Actions.WorldInteract.triggered;
+    
     public bool OpenCloseInventory => playerControls.Actions.OpenCloseInventory.triggered;
 
     #endregion

@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Parameters")]
     [SerializeField] [Tooltip("Default Movement Speed.")] private float moveSpeed = 5f;
     [SerializeField] [Tooltip("Movement speed when sprinting.")] private float sprintSpeed = 10f;
-    [SerializeField] [Tooltip("Visual Character rotation speed.")] private float rotationSpeed = 10f;
     [SerializeField] [Tooltip("In Script Absolute value is Used.")] private float jumpHeight = 1f;
     [SerializeField] [Tooltip("In Script Absolute value is Used.")] private float gravity = 10f;
+    
+    [Header("Settings Parameters")]
+    [SerializeField] private float sensitivity = 1f;
 
     private CharacterController characterController;
     private Vector3 movement;
@@ -40,20 +42,11 @@ public class PlayerMovement : MonoBehaviour
         ApplyMovement();
     }
     
+    private float yaw;
+
     private void HandleRotation()
     {
-        Vector3 move = (
-            -MoveDirection.right * inputManager.MovementInputY +
-            MoveDirection.forward * inputManager.MovementInputX
-        );
-
-        if (move.sqrMagnitude < 0.01f) return;
-        
-        move.y = 0f;
-        move.Normalize();
-
-        Quaternion targetRot = Quaternion.LookRotation(move);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        transform.Rotate(0f, inputManager.CameraInputX * sensitivity/10, 0f);
     }
 
     

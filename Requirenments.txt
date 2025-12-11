@@ -1,0 +1,9 @@
+Tags:
+Interactable
+
+Layers:
+Player
+Interactable
+
+Packages:
+Cinemachine 3.1.5

@@ -225,7 +225,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""be201226-fdf2-449a-9f25-6f7fbadea722"",
             ""actions"": [
                 {
-                    ""name"": ""ItemPickUp"",
+                    ""name"": ""WorldInteract"",
                     ""type"": ""Button"",
                     ""id"": ""bc178665-2124-40ef-995b-a6d3f7a3ece5"",
                     ""expectedControlType"": """",
@@ -251,7 +251,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ItemPickUp"",
+                    ""action"": ""WorldInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -279,7 +279,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
-        m_Actions_ItemPickUp = m_Actions.FindAction("ItemPickUp", throwIfNotFound: true);
+        m_Actions_WorldInteract = m_Actions.FindAction("WorldInteract", throwIfNotFound: true);
         m_Actions_OpenCloseInventory = m_Actions.FindAction("OpenCloseInventory", throwIfNotFound: true);
     }
 
@@ -491,7 +491,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Actions
     private readonly InputActionMap m_Actions;
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
-    private readonly InputAction m_Actions_ItemPickUp;
+    private readonly InputAction m_Actions_WorldInteract;
     private readonly InputAction m_Actions_OpenCloseInventory;
     /// <summary>
     /// Provides access to input actions defined in input action map "Actions".
@@ -505,9 +505,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Actions/ItemPickUp".
+        /// Provides access to the underlying input action "Actions/WorldInteract".
         /// </summary>
-        public InputAction @ItemPickUp => m_Wrapper.m_Actions_ItemPickUp;
+        public InputAction @WorldInteract => m_Wrapper.m_Actions_WorldInteract;
         /// <summary>
         /// Provides access to the underlying input action "Actions/OpenCloseInventory".
         /// </summary>
@@ -538,9 +538,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_ActionsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_ActionsActionsCallbackInterfaces.Add(instance);
-            @ItemPickUp.started += instance.OnItemPickUp;
-            @ItemPickUp.performed += instance.OnItemPickUp;
-            @ItemPickUp.canceled += instance.OnItemPickUp;
+            @WorldInteract.started += instance.OnWorldInteract;
+            @WorldInteract.performed += instance.OnWorldInteract;
+            @WorldInteract.canceled += instance.OnWorldInteract;
             @OpenCloseInventory.started += instance.OnOpenCloseInventory;
             @OpenCloseInventory.performed += instance.OnOpenCloseInventory;
             @OpenCloseInventory.canceled += instance.OnOpenCloseInventory;
@@ -555,9 +555,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="ActionsActions" />
         private void UnregisterCallbacks(IActionsActions instance)
         {
-            @ItemPickUp.started -= instance.OnItemPickUp;
-            @ItemPickUp.performed -= instance.OnItemPickUp;
-            @ItemPickUp.canceled -= instance.OnItemPickUp;
+            @WorldInteract.started -= instance.OnWorldInteract;
+            @WorldInteract.performed -= instance.OnWorldInteract;
+            @WorldInteract.canceled -= instance.OnWorldInteract;
             @OpenCloseInventory.started -= instance.OnOpenCloseInventory;
             @OpenCloseInventory.performed -= instance.OnOpenCloseInventory;
             @OpenCloseInventory.canceled -= instance.OnOpenCloseInventory;
@@ -638,12 +638,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IActionsActions
     {
         /// <summary>
-        /// Method invoked when associated input action "ItemPickUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "WorldInteract" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnItemPickUp(InputAction.CallbackContext context);
+        void OnWorldInteract(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "OpenCloseInventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
