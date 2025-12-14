@@ -1,5 +1,9 @@
 Tags:
 Interactable
+Snow
+Water
+Fire
+Warming
 
 Layers:
 Player
