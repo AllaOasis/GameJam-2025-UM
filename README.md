@@ -17,6 +17,8 @@
 **Slogan:**  
 *“Winter is coming – find all the gifts before the cold gets you.”*
 
+You can install the game [here](https://www.mediafire.com/file/cdkl61clra82qxe/GameJam-AllaOasis-2025.zip/file).
+
 ---
 
 ## 3. Concept Overview
