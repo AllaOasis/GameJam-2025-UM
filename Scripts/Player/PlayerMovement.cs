@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Movement speed when sprinting.")] private float sprintSpeed = 10f;
     [SerializeField] [Tooltip("In Script Absolute value is Used.")] private float jumpHeight = 1f;
     [SerializeField] [Tooltip("In Script Absolute value is Used.")] private float gravity = 10f;
+    
+    public bool canWallJump = false;
 
     [Header("Sliding Parameters")]
     [SerializeField] private float slideSpeed = 5f;
@@ -81,19 +83,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleSliding()
     {
-        if (isSliding)
+        if (!canWallJump)
         {
-            Vector3 slideDirection = Vector3.ProjectOnPlane(Vector3.down, hitNormal).normalized;
-            float slideDuration = slideSpeed * Time.deltaTime;
-            if (slideDuration > maxSlideDuration) slideDuration = maxSlideDuration;
+            if (isSliding)
+            {
+                Vector3 slideDirection = Vector3.ProjectOnPlane(Vector3.down, hitNormal).normalized;
+                float slideDuration = slideSpeed * Time.deltaTime;
+                if (slideDuration > maxSlideDuration) slideDuration = maxSlideDuration;
 
-            movement += slideDirection * slideDuration;
-            alreadySliding = true;
+                movement += slideDirection * slideDuration;
+                alreadySliding = true;
+            }
+            else if (characterController.isGrounded && alreadySliding)
+            {
+                StopSliding();
+            }
         }
-        else if (characterController.isGrounded && alreadySliding)
-        {
-            StopSliding();
-        }
+        else isSliding = false;
     }
 
     private void StopSliding()
@@ -118,7 +124,8 @@ public class PlayerMovement : MonoBehaviour
     {
         hitNormal = hit.normal;
         float angle = Vector3.Angle(hit.normal, Vector3.up);
-
-        isSliding = angle > characterController.slopeLimit + 10f; // Slide on steep slopes
+    
+        if(!canWallJump)
+            isSliding = angle > characterController.slopeLimit + 10f; // Slide on steep slopes
     }
 }
