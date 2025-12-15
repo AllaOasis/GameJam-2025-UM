@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 136861331477922025, guid: e63f121debc2c964c90be81369c5371f, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1181240423502752879, guid: e63f121debc2c964c90be81369c5371f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -123.58
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958867120633083605, guid: e63f121debc2c964c90be81369c5371f, type: 3}
       propertyPath: m_Name
-      value: Mountain_WalkWayA Variant
+      value: Mountain_WalkWayA
       objectReference: {fileID: 0}
     - target: {fileID: 3513793451329692797, guid: e63f121debc2c964c90be81369c5371f, type: 3}
       propertyPath: m_Mesh

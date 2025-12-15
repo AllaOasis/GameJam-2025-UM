@@ -14,14 +14,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Movement speed when sprinting.")] private float sprintSpeed = 10f;
     [SerializeField] [Tooltip("In Script Absolute value is Used.")] private float jumpHeight = 1f;
     [SerializeField] [Tooltip("In Script Absolute value is Used.")] private float gravity = 10f;
-    
+
+    [Header("Sliding Parameters")]
+    [SerializeField] private float slideSpeed = 5f;
+    [SerializeField] private float maxSlideDuration = 1f;
+
     [Header("Settings Parameters")]
     [SerializeField] private float sensitivity = 1f;
 
     private CharacterController characterController;
     private Vector3 movement;
-
-    private Transform MoveDirection => (cameraTransform ? cameraTransform : transform);
+    private Vector3 hitNormal;
+    private bool isSliding = false;
+    private bool alreadySliding = false;
+    private Vector3 downforce = Vector3.zero;
 
     private void Start()
     {
@@ -35,27 +41,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleGravity();
         HandleRotation();
         HandleMovement();
         HandleJump();
+        HandleGravity();
+        HandleSliding();
         ApplyMovement();
     }
-    
-    private float yaw;
 
     private void HandleRotation()
     {
-        transform.Rotate(0f, inputManager.CameraInputX * sensitivity/10, 0f);
+        transform.Rotate(0f, inputManager.CameraInputX * sensitivity / 10, 0f);
     }
 
-    
     private void HandleMovement()
     {
-        Vector3 move = (
-            MoveDirection.forward * inputManager.MovementInputY
-            + MoveDirection.right * inputManager.MovementInputX).normalized;
-
+        Vector3 move = (transform.forward * inputManager.MovementInputY + transform.right * inputManager.MovementInputX).normalized;
         move *= inputManager.SprintInput ? sprintSpeed : moveSpeed;
 
         movement.x = move.x;
@@ -64,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
-        if (characterController.isGrounded && inputManager.JumpInput)
+        if (characterController.isGrounded && inputManager.JumpInput && !isSliding)
         {
             movement.y = Mathf.Sqrt(Mathf.Abs(jumpHeight) * 2f * Mathf.Abs(gravity));
         }
@@ -72,14 +73,52 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGravity()
     {
-        if (characterController.isGrounded && movement.y < -0.1f)
+        if (characterController.isGrounded && movement.y < -0.1f && !isSliding)
             movement.y = -0.1f;
-        
+
         movement.y -= Mathf.Abs(gravity) * Time.deltaTime;
+    }
+
+    private void HandleSliding()
+    {
+        if (isSliding)
+        {
+            Vector3 slideDirection = Vector3.ProjectOnPlane(Vector3.down, hitNormal).normalized;
+            float slideDuration = slideSpeed * Time.deltaTime;
+            if (slideDuration > maxSlideDuration) slideDuration = maxSlideDuration;
+
+            movement += slideDirection * slideDuration;
+            alreadySliding = true;
+        }
+        else if (characterController.isGrounded && alreadySliding)
+        {
+            StopSliding();
+        }
+    }
+
+    private void StopSliding()
+    {
+        movement.x *= Mathf.Pow(1f - slideSpeed * Time.deltaTime, 3f);
+        movement.z *= Mathf.Pow(1f - slideSpeed * Time.deltaTime, 3f);
+
+        if (Mathf.Abs(movement.x) < 0.01f && Mathf.Abs(movement.z) < 0.01f)
+        {
+            alreadySliding = false;
+            movement.x = 0f;
+            movement.z = 0f;
+        }
     }
 
     private void ApplyMovement()
     {
         characterController.Move(movement * Time.deltaTime);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitNormal = hit.normal;
+        float angle = Vector3.Angle(hit.normal, Vector3.up);
+
+        isSliding = angle > characterController.slopeLimit + 10f; // Slide on steep slopes
     }
 }

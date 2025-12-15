@@ -65,12 +65,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: dce98f1662f8b0b49af0dfe2b9bc807e, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: dce98f1662f8b0b49af0dfe2b9bc807e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f751fd1182aaae74f83474f09bf5105e, type: 2}
     - target: {fileID: 919132149155446097, guid: dce98f1662f8b0b49af0dfe2b9bc807e, type: 3}
       propertyPath: m_Name
-      value: RopeFance
+      value: RopeFanceA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -104,5 +108,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3125, y: 0.75, z: 1.25}
-  m_Center: {x: 0.03125, y: 0.375, z: 0}
+  m_Size: {x: 0.3125, y: 1.25, z: 1.25}
+  m_Center: {x: 0.03125, y: 0.625, z: 0}

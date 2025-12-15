@@ -287,6 +287,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: 2c36327b73e1828439f11cd69d92e5e9, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 2c36327b73e1828439f11cd69d92e5e9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 75e6d1aababca154db94b24e6fb8b4ff, type: 2}
@@ -344,8 +348,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.32, y: 2.46875, z: 2.1875}
-  m_Center: {x: -0.72, y: 0.578125, z: 0.03125}
+  m_Size: {x: 0.32, y: 3.46875, z: 2.1875}
+  m_Center: {x: -0.72, y: 1.078125, z: 0.03125}
 --- !u!65 &791536704259985645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -365,8 +369,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.32, y: 2.46875, z: 2.1875}
-  m_Center: {x: 0.6, y: 0.578125, z: 0.03125}
+  m_Size: {x: 0.32, y: 3.46875, z: 2.1875}
+  m_Center: {x: 0.6, y: 1.078125, z: 0.03125}
 --- !u!65 &331642019653791145
 BoxCollider:
   m_ObjectHideFlags: 0
