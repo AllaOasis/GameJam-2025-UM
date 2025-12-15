@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.005
+  m_FogDensity: 0.025
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -22261,6 +22261,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214898059310461170, guid: 0c09125b33cd92848ac2d49d03586b45, type: 3}
   m_PrefabInstance: {fileID: 1521092206}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &983438021 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4845659738863557451, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
+  m_PrefabInstance: {fileID: 653329397}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &983598926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38030,6 +38035,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d8f2a2ae1205464ebf6f4235461f8ce, type: 3}
+--- !u!1 &1636391723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636391725}
+  - component: {fileID: 1636391724}
+  m_Layer: 0
+  m_Name: MouseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1636391724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636391723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767a599e59cff3243ba1a83659e7995c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MouseController
+  controllableUI:
+  - {fileID: 983438021}
+--- !u!4 &1636391725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636391723}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -90.87247, y: -0.00549, z: 19.24131}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1639647560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5103867689863827031, guid: afd2bcba8346e9c47b2dee131bedc506, type: 3}
@@ -52740,3 +52791,4 @@ SceneRoots:
   - {fileID: 1450226573}
   - {fileID: 2009212480}
   - {fileID: 1156211149}
+  - {fileID: 1636391725}
