@@ -29,7 +29,7 @@ public class PlayerChallange : MonoBehaviour
 
         if (TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
         {
-            playerMovement.canWallJump = true;
+            playerMovement.canWallJump = false;
         }
     }
 
@@ -47,7 +47,10 @@ public class PlayerChallange : MonoBehaviour
             {
                 playerHazards.enabled = false;
             }
-            
+            if (TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
+            {
+                playerMovement.canWallJump = true;
+            }
         }
     }
 

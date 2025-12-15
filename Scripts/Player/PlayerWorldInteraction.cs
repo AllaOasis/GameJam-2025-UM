@@ -5,6 +5,7 @@ public class PlayerWorldInteraction : MonoBehaviour
     [Header("External References")]
     [SerializeField] [Tooltip("Transform of the Player Camera Object.")] private Transform cameraTransform;
     [SerializeField] [Tooltip("Reference to the InputManager for the player.")] private InputManager inputManager;
+    [SerializeField] [Tooltip("The press E popup.")] private Transform pressE;
 
     [Header("Interaction Parameters")]
     [SerializeField] [Tooltip("Interaction Range")] [Min(0)] private float range = 5f;
@@ -23,14 +24,12 @@ public class PlayerWorldInteraction : MonoBehaviour
     private void Update() 
     {
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-
-        // Use layer mask to filter hits
+        
         if (Physics.Raycast(ray, out RaycastHit hit, range, interactableLayerMask))
         {
             if (hit.collider.CompareTag("Interactable"))
             {
-                // Show interaction prompt
-                //UIManager.Instance.ShowPrompt("Press E to interact");
+                if(pressE) pressE.gameObject.SetActive(true);
 
                 if (inputManager.InteractClicked && hit.collider.TryGetComponent(out Interactable interactable))
                 {
@@ -39,12 +38,12 @@ public class PlayerWorldInteraction : MonoBehaviour
             }
             else
             {
-                //UIManager.Instance.HidePrompt();
+                if(pressE) pressE.gameObject.SetActive(false);
             }
         }
         else
         {
-            //UIManager.Instance.HidePrompt();
+            if(pressE) pressE.gameObject.SetActive(false);
         }
     }
 

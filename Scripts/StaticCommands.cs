@@ -11,9 +11,9 @@ public static class StaticCommands
     public static void Exit()
     {
 #if UNITY_EDITOR
-        EditorApplication.isPlaying = false; // Stops play mode
+        EditorApplication.isPlaying = false;
 #else
-        Application.Quit(); // Exits build
+        Application.Quit();
 #endif
         Debug.Log("Exit triggered");
     }

@@ -103,8 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1ef235b5dfc714dbee0a8633c272d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableGift
-  finalPosition: {x: 0, y: 0, z: 0}
+  finalPosition: {x: -57.89729, y: 1.416102, z: 48.69319}
   playerChallange: {fileID: 0}
+  pickupParticles: {fileID: 5712219488875869251, guid: 5b67f5d3b7579004f969f8f846709653, type: 3}
 --- !u!65 &4071625327611214084
 BoxCollider:
   m_ObjectHideFlags: 0

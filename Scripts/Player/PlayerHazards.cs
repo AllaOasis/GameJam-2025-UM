@@ -1,10 +1,16 @@
 using System;
+using QFSW.QC;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHazards : MonoBehaviour
 {
     [Header("External References")]
+    [SerializeField] [Tooltip("Reference to the InputManager for the player.")] private InputManager inputManager;
+    [SerializeField] private Rigidbody cameraRigidBody;
+    [SerializeField] private Transform deathScreen;
+    [SerializeField] private Transform menuScreen;
+    [SerializeField] private Transform sliderParent;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider coldSlider;
     [SerializeField] private Slider heatSlider;
@@ -34,8 +40,34 @@ public class PlayerHazards : MonoBehaviour
     private bool inFire;
     private bool nearFire;
 
+    private void Start()
+    {
+        inputManager.Enable();
+        if (cameraRigidBody) cameraRigidBody.useGravity = false;
+        if (deathScreen) deathScreen.gameObject.SetActive(false);
+        if (sliderParent) sliderParent.gameObject.SetActive(true);
+        if (menuScreen) menuScreen.gameObject.SetActive(false);
+    }
+
+    [Command]
+    private void KillPlayer()
+    {
+        health = 0;
+    }
+
     private void Update()
     {
+        if (health <= 0)
+        {
+            inputManager.Enable(false);
+            inputManager.DisableUI();
+            if (cameraRigidBody) cameraRigidBody.useGravity = true;
+            if (deathScreen) deathScreen.gameObject.SetActive(true);
+            if (sliderParent) sliderParent.gameObject.SetActive(false);
+            if (menuScreen) menuScreen.gameObject.SetActive(false);
+            return;
+        } 
+        
         if (inWater)
         {
             if (cold < maxCold) cold += waterHazardRate * Time.deltaTime;
@@ -94,6 +126,9 @@ public class PlayerHazards : MonoBehaviour
             if (!Mathf.Approximately(heatSlider.maxValue, maxHeat)) heatSlider.maxValue = maxHeat; 
             heatSlider.value = heat;
         }
+        
+        
+        
     }
 
     private void OnTriggerEnter(Collider trigger)

@@ -30,6 +30,24 @@ public class InputManager : ScriptableObject
     {
         playerControls.Disable();
     }
+
+    public void Enable(bool enable = true)
+    {
+        if (enable)
+        {
+            playerControls.Movement.Enable();
+            playerControls.Actions.Enable();
+            playerControls.UI.Enable();
+        }
+        else
+        {
+            playerControls.Movement.Disable();
+            playerControls.Actions.Disable();
+            playerControls.UI.Enable();
+        }
+    }
+    
+    public void DisableUI() => playerControls.UI.Disable();
     
     #endregion
     #region Local Variables
@@ -61,6 +79,8 @@ public class InputManager : ScriptableObject
     public bool InteractClicked => playerControls.Actions.WorldInteract.triggered;
     
     public bool OpenCloseInventory => playerControls.Actions.OpenCloseInventory.triggered;
+    
+    public bool OpenCloseMenu => playerControls.UI.ToggleMenu.triggered;
 
     #endregion
 }
